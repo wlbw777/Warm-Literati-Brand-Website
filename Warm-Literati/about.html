@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - LUXE Brand</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== 基礎 ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter', sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* ===== NAV ===== */
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:20px 10%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+}
+
+.logo{
+  font-family:'Playfair Display', serif;
+  font-size:22px;
+  letter-spacing:2px;
+}
+
+.nav-links{
+  display:flex;
+  gap:30px;
+  list-style:none;
+}
+
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+  position:relative;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:0;
+  height:1px;
+  background:#C9A86A;
+  transition:0.3s;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+/* ===== HERO ===== */
+.hero{
+  height:60vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-family:'Playfair Display', serif;
+  font-size:64px;
+  background:linear-gradient(90deg,#fff,#C9A86A);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  color:#aaa;
+  margin-top:10px;
+}
+
+/* ===== ABOUT ===== */
+.about{
+  padding:120px 10%;
+  max-width:1000px;
+  margin:auto;
+}
+
+.about h2{
+  font-size:34px;
+  font-family:'Playfair Display', serif;
+  margin-bottom:15px;
+}
+
+.about p{
+  color:#aaa;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.section{
+  margin-top:80px;
+  text-align:center;
+}
+
+/* 分隔線 */
+.divider{
+  width:60px;
+  height:2px;
+  background:#C9A86A;
+  margin:25px auto;
+  opacity:0.7;
+}
+
+/* highlight */
+.highlight{
+  color:#C9A86A;
+}
+
+/* 圖文區 */
+.about-flex{
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-top: 80px;
+
+  /* ⭐ 區塊置中關鍵 */
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.about-flex img{
+  width: 50%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.about-flex div{
+  flex: 1;
+
+  /* ⭐ 如果你想文字更有精品感（建議保留左對齊） */
+  text-align: left;
+}
+
+/* 📱 RWD 手機版 */
+@media(max-width: 768px){
+  .about-flex{
+    flex-direction: column;
+    text-align: center; /* 手機版置中 */
+  }
+
+  .about-flex img{
+    width: 100%;
+  }
+}
+
+/* 基本置中 */
+.about{
+  padding: 100px 10%;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+/* ✨ 標題淡入 */
+.about h2{
+  font-size: 32px;
+  margin-bottom: 20px;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+}
+
+/* ✨ 中間細線 */
+.divider{
+  width: 60px;
+  height: 1px;
+  background: #aaa;
+  margin: 20px auto;
+
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+  animation-delay: 0.3s;
+}
+
+/* ✨ 文字一行一行出現 */
+.about p{
+  color: #aaa;
+  line-height: 1.8;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.6s;
+}
+
+/* 🎯 動畫 */
+@keyframes fadeUp{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn{
+  to{
+    opacity: 1;
+  }
+}
+
+/* ===== 動畫 ===== */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  animation:fadeIn 1s forwards;
+}
+
+@keyframes fadeIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+body{
+  margin:0;
+  font-family:'Inter', sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+}
+
+.logo{
+  font-family:'Playfair Display', serif;
+  letter-spacing:2px;
+}
+
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:20px 10%;
+  display:flex;
+  justify-content:space-between;
+  z-index:1000;
+  backdrop-filter:blur(10px);
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+}
+
+.nav-links a:hover{
+  color:#C9A86A;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="logo">LUXE</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Collection</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>About</h1>
+  <p>Crafting Time with Elegance</p>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2>Our Philosophy</h2>
+  <div class="divider"></div>
+  <p>Time is emotion, design, and legacy.</p>
+</section>
+  <!-- Philosophy -->
+  <section class="about-flex">
+  <img src="https://www.casio.com/content/dam/casio/product-info/locales/tw/zh-tw/timepiece/product/watch/G/GA/GA2/GA-2100-1A1/assets/GA-2100-1A1_Seq03.jpg.transform/main-visual-sp/image.jpg">
+  <div>
+    <h2>Timeless Design</h2>
+    <p>Inspired by heritage and innovation.</p>
+  </div>
+</section>
+
+  <!-- Vision -->
+  <div class="section fade">
+    <h2>Our Vision</h2>
+    <div class="divider"></div>
+    <p>
+      To create timeless pieces that blend innovation and elegance,  
+      redefining how people experience time.
+    </p>
+  </div>
+
+  <!-- Craft -->
+  <div class="section fade">
+    <h2>Craftsmanship</h2>
+    <div class="divider"></div>
+    <p>
+      Every detail is carefully refined — from material selection  
+      to precision engineering — ensuring perfection in every watch.
+    </p>
+  </div>
+
+  <!-- IMAGE SECTION -->
+  <div class="about-flex fade">
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+    <div>
+      <h2>Timeless Design</h2>
+      <div class="divider"></div>
+      <p>
+        Inspired by heritage and modern engineering, each piece tells a unique story of time.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>

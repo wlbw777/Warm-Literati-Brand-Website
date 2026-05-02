@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CozyHome｜Premium Home Select</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#8C6A4A;
+  --dark:#2B2B2B;
+  --bg:#F7F3EF;
+  --text:#333;
+  --muted:#777;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  scroll-behavior:smooth;
+}
+
+/* NAV */
+nav{
+  position:sticky;
+  top:0;
+  z-index:999;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 8%;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+}
+
+.logo{font-size:22px;font-weight:600;}
+
+nav ul{
+  display:flex;
+  gap:18px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--text);
+  font-size:14px;
+}
+
+nav button{
+  border:none;
+  background:var(--primary);
+  color:#fff;
+  padding:8px 12px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  height:85vh;
+  display:flex;
+  align-items:center;
+  padding:0 8%;
+  color:#fff;
+  background:
+    linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+    url('https://www.ikea.com.tw/dairyfarm/tw/pageImages/page__zh_tw_162401349573783886.jpeg') center/cover no-repeat;
+}
+
+.hero h1{
+  font-size:56px;
+  font-family:'Playfair Display',serif;
+  margin:0;
+}
+
+.hero p{margin:15px 0 25px;color:#eee;}
+
+.btn{
+  display:inline-block;
+  background:var(--primary);
+  color:#fff;
+  padding:12px 20px;
+  border-radius:25px;
+  text-decoration:none;
+}
+
+.btn-outline{
+  border:1px solid #fff;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:25px;
+  margin-left:10px;
+  text-decoration:none;
+}
+
+/* SECTION */
+section{padding:80px 8%;}
+
+h2{text-align:center;margin-bottom:30px;}
+
+/* GRID */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.card{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.card h3{
+  position:absolute;
+  bottom:12px;
+  left:12px;
+  color:#fff;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.4),transparent);
+}
+
+/* PRODUCTS */
+.product-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.product{
+  background:#fff;
+  border-radius:14px;
+  padding:15px;
+  text-align:center;
+  transition:0.35s;
+  cursor:pointer;
+}
+
+.product:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+.product img{
+  width:100%;
+  border-radius:10px;
+}
+
+.product button{
+  margin-top:10px;
+  border:none;
+  background:var(--primary);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ABOUT */
+.about{text-align:center;}
+
+/* CART */
+.cart-drawer{
+  position:fixed;
+  right:-380px;
+  top:0;
+  width:320px;
+  height:100%;
+  background:#fff;
+  box-shadow:-10px 0 30px rgba(0,0,0,0.1);
+  padding:20px;
+  transition:0.4s;
+  z-index:1000;
+  overflow:auto;
+}
+
+.cart-drawer.open{right:0;}
+
+.cart-item{
+  border-bottom:1px solid #eee;
+  padding:10px 0;
+}
+
+.cart-controls button{
+  margin:2px;
+  padding:4px 8px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  background:#fff;
+  padding:20px;
+  width:320px;
+  border-radius:12px;
+}
+
+/* RWD */
+@media(max-width:1024px){
+  .cards,.product-list{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(max-width:600px){
+  .cards,.product-list{grid-template-columns:1fr;}
+  .hero h1{font-size:38px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">CozyHome</div>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <button onclick="openCart()">🛒 Cart</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero reveal">
+  <div>
+    <h1>讓家成為最安心的地方</h1>
+    <p>北歐選品，打造溫暖生活質感</p>
+    <a class="btn">立即選購</a>
+    <a class="btn-outline">探索靈感</a>
+  </div>
+</section>
+
+<!-- CATEGORY -->
+<section class="reveal">
+  <h2>商品分類</h2>
+  <div class="cards">
+    <div class="card" onclick="openProduct('客廳',0)"><img src="https://images.homify.com/v1484346402/p/photo/image/1774178/alentildesign_7.jpg"><h3>客廳</h3></div>
+    <div class="card" onclick="openProduct('臥室',0)"><img src="https://i.epochtimes.com/assets/uploads/2023/12/id14128355-shutterstock_1714586167.jpg"><h3>臥室</h3></div>
+    <div class="card" onclick="openProduct('廚房',0)"><img src="https://www.ikea.com.tw/dairyfarm/tw/pageImages/page__zh_tw_1704769777113490097.jpeg"><h3>廚房</h3></div>
+    <div class="card" onclick="openProduct('裝飾',0)"><img src="https://img.alicdn.com/imgextra/i1/2207733858342/O1CN01oIewC32BUh1oP5IA6_!!2207733858342.png"><h3>裝飾</h3></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="reveal">
+  <h2>熱銷商品</h2>
+
+  <div class="product-list">
+
+    <div class="product" onclick="openProduct('編織收納籃',890)">
+      <img src="https://shoplineimg.com/61b17f8d1fa6f90031181ce8/6642c7ced24403002287847b/800x.jpg">
+      <h3>編織收納籃</h3>
+      <p>$890</p>
+      <button onclick="addToCart(event,'編織收納籃',890)">加入購物車</button>
+    </div>
+
+    <div class="product" onclick="openProduct('毛毯',1200)">
+      <img src="https://img.91app.com/webapi/imagesV3/Original/SalePage/5927329/0/639066502086430000?v=1">
+      <h3>毛毯</h3>
+      <p>$1200</p>
+      <button onclick="addToCart(event,'毛毯',1200)">加入購物車</button>
+    </div>
+
+    <div class="product" onclick="openProduct('木質托盤',750)">
+      <img src="https://media.etmall.com.tw/nximg/00100003214/100003214844/100003214844-2_xxl.jpg">
+      <h3>木質托盤</h3>
+      <p>$750</p>
+      <button onclick="addToCart(event,'木質托盤',750)">加入購物車</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about reveal">
+  <h2>關於 CozyHome</h2>
+  <p>我們相信，家不只是空間，而是一種生活態度。</p>
+</section>
+
+<footer>© 2026 CozyHome</footer>
+
+<!-- CART -->
+<div id="cartDrawer" class="cart-drawer">
+  <h3>購物車</h3>
+  <div id="cartItems"></div>
+  <p id="cartTotal"></p>
+  <button onclick="closeCart()">關閉</button>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="mTitle"></h3>
+    <p id="mPrice"></p>
+    <button onclick="closeModal()">關閉</button>
+  </div>
+</div>
+
+<script>
+
+// scroll reveal
+function reveal(){
+  const trigger=window.innerHeight*0.85;
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(el.classList.contains('active')) return;
+    if(el.getBoundingClientRect().top<trigger){
+      el.classList.add('active');
+    }
+  });
+}
+window.addEventListener('scroll',reveal);
+reveal();
+
+// cart
+let cart=JSON.parse(localStorage.getItem('cart'))||[];
+
+function saveCart(){
+  localStorage.setItem('cart',JSON.stringify(cart));
+  renderCart();
+}
+
+function addToCart(e,name,price){
+  if(e) e.stopPropagation();
+
+  const item=cart.find(i=>i.name===name);
+
+  if(item){
+    item.qty++;
+  }else{
+    cart.push({name,price,qty:1});
+  }
+
+  saveCart();
+  openCart();
+}
+
+function plus(i){ cart[i].qty++; saveCart(); }
+function minus(i){ cart[i].qty--; if(cart[i].qty<=0) cart.splice(i,1); saveCart(); }
+function removeItem(i){ cart.splice(i,1); saveCart(); }
+
+function renderCart(){
+  const box=document.getElementById('cartItems');
+  let total=0;
+
+  if(cart.length===0){
+    box.innerHTML="<p>購物車是空的</p>";
+    document.getElementById('cartTotal').innerText="";
+    return;
+  }
+
+  box.innerHTML=cart.map((i,index)=>{
+    total+=i.price*i.qty;
+
+    return `
+      <div class="cart-item">
+        <p><b>${i.name}</b></p>
+        <p>$${i.price}</p>
+        <div class="cart-controls">
+          <button onclick="minus(${index})">-</button>
+          <span>${i.qty}</span>
+          <button onclick="plus(${index})">+</button>
+          <button onclick="removeItem(${index})">刪除</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('cartTotal').innerText="Total: $"+total;
+}
+
+function openCart(){
+  document.getElementById('cartDrawer').classList.add('open');
+  renderCart();
+}
+
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+}
+
+function openProduct(name,price){
+  document.getElementById('mTitle').innerText=name;
+  document.getElementById('mPrice').innerText='$'+price;
+  document.getElementById('modal').style.display='flex';
+}
+
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+}
+
+renderCart();
+
+</script>
+
+</body>
+</html>

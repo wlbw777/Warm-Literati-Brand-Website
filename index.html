@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Warm Literati Brand Website</title>
+  <meta name="description" content="溫馨文青品牌網站設計，完整手機版優化與高級感 UI" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f6f2;
+      color: #000000;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(247, 246, 242, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .desktop-menu {
+      display: flex;
+      gap: 28px;
+      font-weight: 500;
+    }
+
+    .desktop-menu a:hover {
+      opacity: 0.7;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #1f2d24;
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(82%, 360px);
+      height: 100vh;
+      min-height: 100dvh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: #ffffff;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.08);
+      padding: 28px;
+      transition: right 0.35s ease;
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-drawer.active {
+      right: 0;
+    }
+
+    .mobile-drawer a {
+      display: block;
+      padding: 18px 0;
+      font-size: 1.05rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .close-btn {
+      font-size: 30px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero {
+      padding: 100px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: #000000;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: #000000;
+      color: white;
+      font-weight: 600;
+      transition: 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    .card img {
+      height: 220px;
+    }
+
+    .card h3 {
+      margin: 18px 0 10px;
+    }
+
+    footer {
+      padding: 60px 0;
+      text-align: center;
+      color: #66756d;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-menu {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      nav {
+        padding: 14px 0;
+      }
+
+      .hero {
+        padding: 64px 0 50px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
+      .hero p {
+        font-size: 0.98rem;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+        padding: 16px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .card img {
+        height: 200px;
+      }
+    }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 0 0 80px;
+}
+
+.grid .card {
+  background: white;
+  padding: 20px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.grid .card:hover {
+  transform: translateY(-6px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.line-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: #000000;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  transition: 0.25s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.line-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+}
+
+.line-btn:active {
+  transform: translateY(0px);
+}
+
+<style>
+/* ===== 頁面初始進場動畫 ===== */
+body {
+  animation: pageFadeIn 1s ease;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== 區塊滑動漸顯動畫 ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(50px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+  will-change: opacity, transform;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 往上滑回來也保留順暢感 */
+.fade-up.hide {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* 手機版更自然 */
+@media (max-width: 768px) {
+  .fade-up {
+    transform: translateY(36px);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="mobile-drawer" id="drawer">
+    <div class="close-btn" onclick="closeMenu()">×</div>
+    <a href="#home">首頁</a>
+<a href="#portfolio">作品集</a>
+<a href="#services">服務內容</a>
+<a href="#contact">聯絡我們</a>
+  </aside>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Warm Literati</div>
+
+        <div class="desktop-menu">
+  <a href="#home">首頁</a>
+  <a href="#portfolio">作品集</a>
+  <a href="#services">服務內容</a>
+  <a href="#contact">聯絡我們</a>
+</div>
+
+        <button class="menu-btn" onclick="openMenu()">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero fade-up" id="home">
+    <div class="container hero-grid">
+      <div>
+        <h1>高級感的<br>品牌網站設計</h1>
+        <p>結合 UI 與 UX 的完整體驗，打造適合手機、平板與桌機的高品質品牌展示網站。</p>
+        <a href="#contact" class="btn">立即開始</a>
+      </div>
+
+      <div>
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80" alt="Hero Image">
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-up" id="services">
+    <div class="container">
+      <h2>核心服務</h2>
+
+      <div class="cards">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="UI">
+          <h3>UI 設計</h3>
+          <p>高級感介面視覺與品牌風格整合。</p>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="UX">
+          <h3>UX 優化</h3>
+          <p>完整使用流程與轉換率提升策略。</p>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Brand">
+          <h3>品牌網站</h3>
+          <p>GitHub Pages 可直接部署上線版本。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔥 這裡是放作品集入口 -->
+<section class="section fade-up" id="portfolio">
+  <div class="container">
+    <h2>作品集</h2>
+    <p>UI / UX / Frontend / System Design</p>
+
+    <div class="grid">
+
+      <a href="Warm-Literati/index.html" class="card">
+        <img src="images/project1.jpg.png" alt="">
+        <h3>Warm Literati</h3>
+        <p>品牌網站</p>
+      </a>
+
+      <a href="EMS-Pro/Energy-Management-System-Ui.html" class="card">
+        <img src="images/screenshot-1777698945458.png" alt="">
+        <h3>EMS Pro</h3>
+        <p>工業系統</p>
+      </a>
+
+      <a href="LUXE/index.html" class="card">
+        <img src="images/project2.jpg.png" alt="">
+        <h3>EC</h3>
+        <p>電商網站</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+    <section class="section fade-up" id="advantages">
+    <div class="container">
+      <h2>品牌優勢</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>高轉換設計</h3>
+          <p>不只好看，更重視使用者行為與商業目標，提升詢問率與品牌信任感。</p>
+        </div>
+
+        <div class="card">
+          <h3>完整響應式</h3>
+          <p>針對手機、平板、桌機全面優化，確保不同裝置皆有流暢一致的體驗。</p>
+        </div>
+
+        <div class="card">
+          <h3>快速部署上線</h3>
+          <p>支援 GitHub Pages 與品牌正式上線流程，從設計到發布一次完成。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="section fade-up">
+    <div class="container">
+      <h2>客戶評價</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>品牌形象大幅提升</h3>
+          <p>網站整體質感非常高級，讓品牌更有信任感，也提升了詢問率。</p>
+          <p>— 品牌客戶 A</p>
+        </div>
+
+        <div class="card">
+          <h3>手機版非常順暢</h3>
+          <p>使用者在手機上瀏覽非常舒服，轉換率明顯比舊版更好。</p>
+          <p>— 品牌客戶 B</p>
+        </div>
+
+        <div class="card">
+          <h3>快速上線效率高</h3>
+          <p>從設計到部署非常完整，節省大量時間，整體合作很順利。</p>
+          <p>— 品牌客戶 C</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-up" id="contact">
+    <div class="container">
+      <h2>聯絡我們</h2>
+      <div class="card">
+        <h3>開始你的品牌升級</h3>
+        <p>提供 UI/UX 設計、品牌網站建置、企業形象升級服務。</p>
+        <p>LINE:@889isxgf</p>
+        <br>
+       <a class="line-btn" href="https://lin.ee/Rfaa5CY" target="_blank">
+  💬 LINE 諮詢
+</a>
+      </div>
+    </div>
+  </section>
+
+<footer>
+    © 2026 Warm Literati Brand Website
+  </footer>
+
+<!-- ===== JS ===== -->
+
+<script>
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('overlay');
+const body = document.body;
+const mobileLinks = drawer.querySelectorAll('a');
+
+/* 手機選單 */
+function openMenu() {
+  drawer.classList.add('active');
+  overlay.classList.add('active');
+  body.classList.add('menu-open');
+}
+
+function closeMenu() {
+  drawer.classList.remove('active');
+  overlay.classList.remove('active');
+  body.classList.remove('menu-open');
+}
+
+overlay.addEventListener('click', closeMenu);
+
+mobileLinks.forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMenu();
+  }
+});
+
+/* ===== 滾動漸顯動畫 ===== */
+const fadeElements = document.querySelectorAll('.fade-up');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      entry.target.classList.remove('hide');
+    } else {
+      entry.target.classList.remove('show');
+      entry.target.classList.add('hide');
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+fadeElements.forEach(el => {
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

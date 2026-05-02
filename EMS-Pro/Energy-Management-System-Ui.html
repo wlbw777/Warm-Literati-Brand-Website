@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industrial EMS Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter','Noto Sans TC',sans-serif}
+    body{background:#08111f;color:#f8fafc}
+    .wrap{display:flex;min-height:100vh}
+    .sidebar{width:280px;background:#0b1220;border-right:1px solid rgba(255,255,255,.06);padding:28px}
+    .logo{font-size:24px;font-weight:800;color:#10b981;margin-bottom:36px}
+    .menu{display:flex;flex-direction:column;gap:12px}
+    .menu a{padding:14px 16px;border-radius:14px;text-decoration:none;color:#cbd5e1;transition:.25s}
+    .menu a:hover,.menu a.active{background:#1d4ed8;color:#fff}
+    .main{flex:1;padding:30px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+    h1{font-size:34px;font-weight:800}
+    .sub{color:#94a3b8;margin-top:8px}
+    .alarm{background:#dc2626;padding:12px 18px;border-radius:14px;font-weight:700;cursor:pointer}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-bottom:24px}
+    .card,.panel{background:#111c31;border:1px solid rgba(255,255,255,.05);border-radius:22px;padding:24px}
+    .label{font-size:14px;color:#94a3b8;margin-bottom:10px}
+    .value{font-size:32px;font-weight:800}
+    .green{color:#10b981}.blue{color:#60a5fa}.yellow{color:#f59e0b}.red{color:#ef4444}
+    .panel h2{margin-bottom:18px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:16px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+    th{font-size:14px;color:#94a3b8}
+    .status{padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700;display:inline-block}
+    .running{background:rgba(16,185,129,.12);color:#10b981}
+    .stopped{background:rgba(245,158,11,.12);color:#f59e0b}
+    .warning{background:rgba(239,68,68,.12);color:#ef4444}
+    button{background:#2563eb;border:none;color:#fff;padding:10px 18px;border-radius:12px;font-weight:700;cursor:pointer}
+    .chart{height:220px;border-radius:18px;background:linear-gradient(180deg,#0f172a,#111827);display:flex;align-items:center;justify-content:center;color:#64748b}
+    .blink{animation:blink 1s infinite}
+    @keyframes blink{50%{opacity:.4}}
+    @media(max-width:768px){.wrap{flex-direction:column}.sidebar{width:100%}.main{padding:18px}table{display:block;overflow:auto}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="sidebar">
+    <div class="logo">⚡ EMS PRO</div>
+    <nav class="menu">
+      <a href="#" class="active">總覽儀表板</a>
+      <a href="#">設備監控中心</a>
+      <a href="#">PLC 遠端控制</a>
+      <a href="#">能源趨勢分析</a>
+      <a href="#">異常警報中心</a>
+      <a href="#">權限管理</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <div>
+        <h1>能源管理系統</h1>
+        <div class="sub">即時監測｜設備控制｜報表分析｜異常警報</div>
+      </div>
+      <div class="alarm blink" onclick="showAlarm()">異常警報：3</div>
+    </div>
+
+    <section class="grid">
+      <div class="card"><div class="label">即時總用電量</div><div class="value green">1,482 kWh</div></div>
+      <div class="card"><div class="label">今日尖峰負載</div><div class="value blue">318 kW</div></div>
+      <div class="card"><div class="label">設備運作率</div><div class="value yellow">91%</div></div>
+      <div class="card"><div class="label">碳排估算</div><div class="value red">188 kg</div></div>
+    </section>
+
+    <section class="panel">
+      <h2>設備監控列表</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>設備名稱</th>
+            <th>狀態</th>
+            <th>功率</th>
+            <th>用電量</th>
+            <th>控制</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>空調主機 A</td>
+            <td><span class="status running">運轉中</span></td>
+            <td class="power">12.5 kW</td>
+            <td>98 kWh</td>
+            <td><button onclick="toggle(this)">ON</button></td>
+          </tr>
+          <tr>
+            <td>冰水主機 B</td>
+            <td><span class="status stopped">停止中</span></td>
+            <td class="power">0.0 kW</td>
+            <td>65 kWh</td>
+            <td><button onclick="toggle(this)">OFF</button></td>
+          </tr>
+          <tr>
+            <td>馬達設備 C</td>
+            <td><span class="status warning">異常警報</span></td>
+            <td class="power">20.1 kW</td>
+            <td>156 kWh</td>
+            <td><button onclick="detail()">查看</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" style="margin-top:24px">
+      <h2>能源趨勢分析圖</h2>
+      <div class="chart">即時趨勢圖（可串接 Chart.js / API）</div>
+    </section>
+  </main>
+</div>
+
+<script>
+function toggle(btn){
+  const row = btn.closest('tr');
+  const status = row.querySelector('.status');
+  const power = row.querySelector('.power');
+
+  if(btn.innerText === 'ON'){
+    btn.innerText = 'OFF';
+    status.innerText = '停止中';
+    status.className = 'status stopped';
+    power.innerText = '0.0 kW';
+  }else{
+    btn.innerText = 'ON';
+    status.innerText = '運轉中';
+    status.className = 'status running';
+    power.innerText = '12.5 kW';
+  }
+}
+
+function showAlarm(){
+  alert('警報中心\n1. 馬達設備 C 過載\n2. 空調主機 A 高溫\n3. 冰水主機 B 壓力異常');
+}
+
+function detail(){
+  alert('設備異常詳細資訊\n目前設備負載過高，請立即檢查。');
+}
+</script>
+</body>
+</html>
